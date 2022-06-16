@@ -16,8 +16,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private RestTemplate restTemplate = new RestTemplate();
-
     public User saveUser(User user) {
 
         log.info("Inside saveUser of UserService");
@@ -25,15 +23,16 @@ public class UserService {
 
     }
 
+    // This method returns both Department and User objects as one ResponseTemplateVO object.
+    // It interacts with the Department microservice to get information from it, for its own functions.
     public ResponseTemplateVO getUserWithDepartment(Long userId) {
 
         log.info("Inside getUserWithDepartment of UserService");
         ResponseTemplateVO vo = new ResponseTemplateVO();
         User user = userRepository.findByUserId(userId);
 
-        Department department =
-                restTemplate.getForObject("http://localhost:9001/departments/" + user.getDepartmentId()
-                        , Department.class);
+        Department department = new RestTemplate()
+                .getForObject("http://localhost:9001/departments/" + user.getDepartmentId(), Department.class);
 
         vo.setUser(user);
         vo.setDepartment(department);

@@ -23,6 +23,8 @@ public class UserController {
 
     }
 
+    // This method returns both a Department and User object at the same time.
+    // The custom ResponseTemplateVO object contains both a Department and User field.
     @GetMapping("/{id}")
     public ResponseTemplateVO getUserWithDepartment(@PathVariable("id") Long userId) {
 

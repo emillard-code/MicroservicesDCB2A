@@ -18,7 +18,7 @@ public class UserController {
     @PostMapping("/")
     public User saveUser(@RequestBody User user) {
 
-        log.info("Inside saveUser of UserController");
+        log.info("Slf4j: Inside saveUser of UserController");
         return userService.saveUser(user);
 
     }
@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseTemplateVO getUserWithDepartment(@PathVariable("id") Long userId) {
 
-        log.info("Inside getUserWithDepartment of UserController");
+        log.info("Slf4j: Inside getUserWithDepartment of UserController");
         return userService.getUserWithDepartment(userId);
 
     }
